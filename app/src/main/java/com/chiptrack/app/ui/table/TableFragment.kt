@@ -18,6 +18,7 @@ import com.chiptrack.app.share.ShareHelper
 import com.chiptrack.app.ui.history.HistoryFragment
 import com.chiptrack.app.ui.navigateOnce
 import com.chiptrack.app.ui.showWithAppFonts
+import com.chiptrack.app.ui.sticker.StickerMood
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -47,6 +48,8 @@ class TableFragment : Fragment() {
         )
         binding.playersList.layoutManager = LinearLayoutManager(requireContext())
         binding.playersList.adapter = adapter
+        binding.tableSticker.bind(StickerMood.forPlaying(), sizeDp = 88, rotation = -4f)
+        binding.tableStickerCaption.text = getString(R.string.sticker_playing_caption)
 
         binding.addPlayerButton.setOnClickListener { showAddPlayerDialog() }
         binding.historyButton.setOnClickListener {

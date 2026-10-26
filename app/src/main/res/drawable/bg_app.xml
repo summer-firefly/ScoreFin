@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 氛围渐变背景：作为主题色场，而不是幕后贴一张立绘大图 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <bitmap
-            android:gravity="fill"
-            android:src="@drawable/bg_sea_scene" />
+        <shape android:shape="rectangle">
+            <solid android:color="@color/mist" />
+        </shape>
     </item>
-    <!-- 轻纸白遮罩，保证卡片与文字可读 -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#B3F7F8FB" />
+            <gradient
+                android:angle="165"
+                android:centerColor="#FF182234"
+                android:endColor="@color/mist"
+                android:startColor="#FF243554"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item android:bottom="520dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="#00121826"
+                android:startColor="#552A4068"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item
+        android:gravity="bottom"
+        android:top="640dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:endColor="#00121826"
+                android:startColor="#33283A52"
+                android:type="linear" />
         </shape>
     </item>
 </layer-list>

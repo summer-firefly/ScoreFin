@@ -15,7 +15,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * 不接微信 SDK：优先直达微信；记住上次目标 App；必要时再走系统选择器。
- * 结算有 AI 复盘时分享两张图：成绩单 + 复盘。
  * 测试版可选无障碍宏：首次录制微信内点击，之后回放。
  */
 object ShareHelper {
@@ -23,8 +22,7 @@ object ShareHelper {
 
     fun shareSessionTable(
         fragment: Fragment,
-        session: GameSession,
-        aiReport: String? = null
+        session: GameSession
     ) {
         val context = fragment.requireContext()
         if (session.players.isEmpty()) {
@@ -39,28 +37,8 @@ object ShareHelper {
         ScoreboardImageExporter.capture(activity, session, deltas) { tableResult ->
             tableResult
                 .onSuccess { tableUri ->
-                    val report = aiReport?.trim()?.takeIf { it.isNotEmpty() }
-                    if (report == null) {
-                        snapshotStore.saveFromSession(session)
-                        launchShare(fragment, listOf(tableUri))
-                        return@onSuccess
-                    }
-                    ScoreboardImageExporter.captureAiReport(activity, report) { reportResult ->
-                        reportResult
-                            .onSuccess { reportUri ->
-                                snapshotStore.saveFromSession(session)
-                                launchShare(fragment, listOf(tableUri, reportUri))
-                            }
-                            .onFailure {
-                                Toast.makeText(
-                                    context,
-                                    R.string.share_report_image_failed,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                snapshotStore.saveFromSession(session)
-                                launchShare(fragment, listOf(tableUri))
-                            }
-                    }
+                    snapshotStore.saveFromSession(session)
+                    launchShare(fragment, listOf(tableUri))
                 }
                 .onFailure {
                     Toast.makeText(context, R.string.share_failed, Toast.LENGTH_SHORT).show()
@@ -209,11 +187,7 @@ object ShareHelper {
     }
 
     private fun buildSendIntent(context: Context, uris: List<Uri>): Intent {
-        val caption = if (uris.size > 1) {
-            context.getString(R.string.share_text_with_two_images)
-        } else {
-            context.getString(R.string.share_text)
-        }
+        val caption = context.getString(R.string.share_text)
         return if (uris.size <= 1) {
             val uri = uris.first()
             Intent(Intent.ACTION_SEND).apply {

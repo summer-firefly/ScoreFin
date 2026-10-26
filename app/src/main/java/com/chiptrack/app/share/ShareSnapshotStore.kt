@@ -24,8 +24,8 @@ data class PlayerShareDelta(
     val deltaReturned: Int,
     val isNew: Boolean
 ) {
-    /** 净变动：拿取增加为正，退还增加为负 */
-    val deltaNet: Int get() = deltaTaken - deltaReturned
+    /** 积分变动：归还增加为正，拿取增加为负 */
+    val deltaNet: Int get() = deltaReturned - deltaTaken
 
     val hasChange: Boolean
         get() = isNew || deltaTaken != 0 || deltaReturned != 0

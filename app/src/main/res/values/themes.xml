@@ -4,41 +4,49 @@
     <style name="TextAppearance.ChipTrack" parent="TextAppearance.Material3.BodyLarge">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Body" parent="TextAppearance.Material3.BodyLarge">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Title" parent="TextAppearance.Material3.TitleMedium">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Headline" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Label" parent="TextAppearance.Material3.LabelLarge">
         <item name="fontFamily">@font/monaco</item>
         <item name="android:fontFamily">@font/monaco</item>
+        <item name="android:textColor">@color/ink</item>
     </style>
 
     <style name="Widget.ChipTrack.Button" parent="Widget.Material3.Button">
@@ -50,18 +58,21 @@
         <item name="titleTextAppearance">@style/TextAppearance.ChipTrack.TitleLarge</item>
     </style>
 
-    <style name="Theme.ChipTrack" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/sky_blue</item>
+    <style name="Theme.ChipTrack" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/sky_blue_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/sky_blue_deep</item>
-        <item name="colorSecondary">@color/chip_gold</item>
-        <item name="colorOnSecondary">@color/ink</item>
+        <item name="colorPrimaryDark">@color/mist</item>
+        <item name="colorSecondary">@color/sky_blue</item>
+        <item name="colorOnSecondary">@color/mist</item>
         <item name="colorSurface">@color/surface</item>
-        <item name="android:statusBarColor">@color/sky_blue_deep</item>
-        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="android:statusBarColor">@color/mist</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/mist</item>
         <item name="android:windowBackground">@drawable/bg_app</item>
         <item name="android:textColorPrimary">@color/ink</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:colorBackground">@color/mist</item>
 
         <item name="android:fontFamily">@font/monaco</item>
         <item name="fontFamily">@font/monaco</item>

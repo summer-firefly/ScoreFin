@@ -13,7 +13,7 @@
         android:paddingTop="16dp"
         android:text="@string/final_return_title"
         android:textAppearance="?attr/textAppearanceHeadlineSmall"
-        android:textColor="@color/sky_blue_deep"
+        android:textColor="@color/ink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

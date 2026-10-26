@@ -23,16 +23,16 @@ object RecordFormat {
     }
 
     fun amountText(record: ChipRecord): String = when (record.action) {
-        ChipAction.JOIN, ChipAction.TAKE -> "+${record.amount}"
-        ChipAction.RETURN, ChipAction.FINAL_RETURN -> record.amount.toString()
+        ChipAction.JOIN, ChipAction.TAKE -> "-${record.amount}"
+        ChipAction.RETURN, ChipAction.FINAL_RETURN -> "+${record.amount}"
         ChipAction.EXIT -> "—"
     }
 
     fun amountColor(context: Context, record: ChipRecord): Int {
         val profitLike = when (record.action) {
-            ChipAction.TAKE -> -1
+            ChipAction.JOIN, ChipAction.TAKE -> -1
             ChipAction.RETURN, ChipAction.FINAL_RETURN -> 1
-            ChipAction.JOIN, ChipAction.EXIT -> 0
+            ChipAction.EXIT -> 0
         }
         return ProfitFormat.color(context, profitLike)
     }

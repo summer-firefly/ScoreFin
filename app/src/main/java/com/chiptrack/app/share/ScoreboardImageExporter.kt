@@ -16,6 +16,7 @@ import com.chiptrack.app.model.GameSession
 import com.chiptrack.app.model.Player
 import com.chiptrack.app.model.PlayerStatus
 import com.chiptrack.app.model.SessionPhase
+import com.chiptrack.app.ui.sticker.StickerMood
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -39,7 +40,7 @@ object ScoreboardImageExporter {
     private val EXPORT_SCALE_CANDIDATES = floatArrayOf(5f, 4f, 3.5f, 3f)
     /** 单张 Bitmap 像素上限，降低 OOM 风险 */
     private const val MAX_BITMAP_PIXELS = 28_000_000L
-    private const val BG_COLOR = 0xFFF7F8FB.toInt()
+    private const val BG_COLOR = 0xFF121826.toInt()
     private const val CROP_PADDING_PX = 24
 
     fun capture(
@@ -49,20 +50,6 @@ object ScoreboardImageExporter {
         onResult: (Result<Uri>) -> Unit
     ) {
         renderHtml(activity, buildHtml(session, deltas), onResult)
-    }
-
-    /** 单独生成「本局 AI 复盘」图片 */
-    fun captureAiReport(
-        activity: Activity,
-        reportText: String,
-        onResult: (Result<Uri>) -> Unit
-    ) {
-        val text = reportText.trim()
-        if (text.isEmpty()) {
-            onResult(Result.failure(IllegalArgumentException("empty report")))
-            return
-        }
-        renderHtml(activity, buildAiReportHtml(text), onResult)
     }
 
     private fun renderHtml(
@@ -348,11 +335,11 @@ object ScoreboardImageExporter {
     }
 
     private fun isNearBg(color: Int): Boolean {
-        // 只认画布纸白 #F7F8FB，勿把白色卡片当背景裁掉
+        // 只认画布深色 #121826，勿把卡片当背景裁掉
         val r = Color.red(color)
         val g = Color.green(color)
         val b = Color.blue(color)
-        return abs(r - 247) <= 12 && abs(g - 248) <= 12 && abs(b - 251) <= 12
+        return abs(r - 0x12) <= 14 && abs(g - 0x18) <= 14 && abs(b - 0x26) <= 14
     }
 
     private fun saveToCache(activity: Activity, bitmap: Bitmap): Uri {
@@ -375,19 +362,32 @@ object ScoreboardImageExporter {
         val settled = session.phase == SessionPhase.SETTLED
         val title = if (settled) "蓝色大肥鱼 · 本局结算表" else "蓝色大肥鱼 · 对局实时表"
         val time = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+        val mood = if (settled) {
+            StickerMood.forSettle(session.totalProfit, session.reconcileGap)
+        } else {
+            StickerMood.forPlaying()
+        }
+        val stickerBlock = """
+      <div class="sticker-wrap">
+        <div class="sticker-card">
+          <img class="sticker" src="stickers/${mood.assetFileName}" alt="" />
+        </div>
+        <div class="sticker-caption">${escape(mood.caption)}</div>
+      </div>
+        """.trimIndent()
 
         val deltaById = deltas.associateBy { it.player.id }
         val changed = deltas.filter { it.hasChange }
-        val sumNet = session.players.sumOf { it.netTaken }
+        val sumScore = session.players.sumOf { it.profit }
         val sumDeltaNet = changed.sumOf { it.deltaNet }
 
         val summary = if (settled) {
             val t = session.totalProfit
             val profitText = if (t > 0) "+$t" else "$t"
-            "盈亏合计 $profitText · 拿取 ${session.totalTakenSum} · 退还 ${session.totalReturnedSum}"
+            "盈亏合计 $profitText · 拿取 ${session.totalTakenSum} · 归还 ${session.totalReturnedSum}"
         } else {
             buildString {
-                append("积分合计 $sumNet")
+                append("积分合计 ${signed(sumScore)}")
                 if (sumDeltaNet != 0) append("（${signed(sumDeltaNet)}）")
                 val exitedCount = session.exitedPlayers.size
                 if (exitedCount > 0) append(" · 已离桌 $exitedCount 人")
@@ -398,8 +398,8 @@ object ScoreboardImageExporter {
             val gap = session.reconcileGap
             when {
                 gap == 0 -> "对账：账目平衡"
-                gap > 0 -> "对账：多退了 $gap"
-                else -> "对账：少退了 ${abs(gap)}"
+                gap > 0 -> "对账：多还了 $gap"
+                else -> "对账：少还了 ${abs(gap)}"
             }
         } else {
             "对局进行中"
@@ -508,18 +508,23 @@ object ScoreboardImageExporter {
                 </tr>
                 """.trimIndent()
             } else {
-                val net = p.netTaken
+                val score = p.profit
                 val deltaNet = d?.deltaNet ?: 0
                 val deltaCls = when {
                     deltaNet > 0 -> "delta-up"
                     deltaNet < 0 -> "delta-down"
                     else -> "delta-flat"
                 }
-                val valueCell = amountWithDelta(net, deltaNet, deltaCls)
+                val scoreClass = when {
+                    score > 0 -> "pos"
+                    score < 0 -> "neg"
+                    else -> "zero"
+                }
+                val valueCell = amountWithDelta(score, deltaNet, deltaCls)
                 """
                 <tr$rowClass>
                   <td class="name">${escape(p.name)}$nameExtra</td>
-                  <td class="num">$valueCell</td>
+                  <td class="num $scoreClass">$valueCell</td>
                 </tr>
                 """.trimIndent()
             }
@@ -567,28 +572,28 @@ object ScoreboardImageExporter {
   html, body {
     width: ${CSS_WIDTH}px;
     min-height: 100%;
-    background: #F7F8FB;
-    color: #16213D;
+    background: #121826;
+    color: #E8EEF7;
     font-family: 'Monaco', 'HuaWenKaiTi', serif;
   }
   .page {
     width: ${CSS_WIDTH}px;
     padding: 28px;
     background:
-      linear-gradient(180deg, rgba(247,248,251,0.92) 0%, rgba(247,248,251,0.96) 100%),
+      linear-gradient(180deg, rgba(18,24,38,0.92) 0%, rgba(18,24,38,0.96) 100%),
       url('share_header.png') top center / 100% auto no-repeat,
-      #F7F8FB;
+      #121826;
   }
   .card {
-    background: rgba(255,255,255,0.94);
-    border: 1px solid #DFE8F5;
+    background: rgba(28,36,56,0.96);
+    border: 1px solid #2A3550;
     border-radius: 20px;
     overflow: hidden;
   }
   .hero {
     padding: 22px 28px 18px;
-    background: linear-gradient(180deg, #DFE8F5 0%, #F7F8FB 100%);
-    border-bottom: 1px solid #DFE8F5;
+    background: linear-gradient(180deg, #2A3550 0%, #121826 100%);
+    border-bottom: 1px solid #2A3550;
   }
   .brand-row {
     display: flex;
@@ -604,47 +609,47 @@ object ScoreboardImageExporter {
   .brand {
     font-size: 12px;
     letter-spacing: 0.06em;
-    color: #607AA9;
+    color: #9BB0D2;
     font-weight: 700;
   }
   h1 {
     font-size: 26px;
     line-height: 1.25;
-    color: #202D52;
+    color: #C5D0E6;
     font-weight: 700;
     margin-bottom: 12px;
   }
-  .meta { font-size: 14px; line-height: 1.55; color: #73809A; }
+  .meta { font-size: 14px; line-height: 1.55; color: #9AA6BC; }
   .meta .line { margin-top: 2px; }
-  .status-live { color: #607AA9; font-weight: 700; }
-  .status-ok { color: #1B7A3D; font-weight: 700; }
-  .status-bad { color: #B3261E; font-weight: 700; }
+  .status-live { color: #9BB0D2; font-weight: 700; }
+  .status-ok { color: #6BCB95; font-weight: 700; }
+  .status-bad { color: #E08A8A; font-weight: 700; }
   .changes {
     margin: 0;
     padding: 16px 22px;
-    background: #EEF3FA;
-    border-bottom: 1px solid #DFE8F5;
+    background: #232B3E;
+    border-bottom: 1px solid #2A3550;
   }
   .changes-title {
     font-size: 13px;
     font-weight: 700;
-    color: #4E6794;
+    color: #9BB0D2;
     margin-bottom: 10px;
   }
   .change-item {
     font-size: 15px;
     line-height: 1.55;
-    color: #16213D;
+    color: #E8EEF7;
     margin-top: 4px;
   }
   .change-name { font-weight: 700; margin-right: 8px; }
-  .change-detail { color: #334155; }
+  .change-detail { color: #B8C2D4; }
   .tag {
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #4E6794;
-    background: #DFE8F5;
+    color: #9BB0D2;
+    background: #2A3550;
     border-radius: 4px;
     padding: 1px 6px;
     vertical-align: middle;
@@ -653,8 +658,8 @@ object ScoreboardImageExporter {
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #5A6B78;
-    background: #E8EEF2;
+    color: #9AA6BC;
+    background: #2A3550;
     border-radius: 4px;
     padding: 1px 6px;
     vertical-align: middle;
@@ -671,45 +676,45 @@ object ScoreboardImageExporter {
   }
   .medal.gold {
     color: #8A5A00;
-    background: #F3E6C8;
-    border: 1px solid #B99A67;
+    background: #3A3428;
+    border: 1px solid #C4AE86;
   }
   .medal.silver {
     color: #4A5560;
-    background: #E8EEF2;
+    background: #2A3550;
     border: 1px solid #B0B8C0;
   }
   .medal.bronze {
     color: #7A3E14;
-    background: #F1C7C5;
+    background: #5A4548;
     border: 1px solid #D49A96;
   }
   table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   thead th {
-    background: #DFE8F5;
-    color: #73809A;
+    background: #2A3550;
+    color: #9AA6BC;
     font-size: 13px;
     font-weight: 700;
     text-align: left;
     padding: 14px 22px;
-    border-bottom: 1px solid #D0DBEC;
+    border-bottom: 1px solid #2A3550;
   }
   thead th.num { text-align: right; width: 42%; }
   tbody td {
     padding: 16px 22px;
     font-size: 18px;
-    border-bottom: 1px solid #EEF2F8;
+    border-bottom: 1px solid #232B3E;
     word-break: break-all;
     vertical-align: middle;
   }
-  tbody tr:nth-child(even) { background: #F7F8FB; }
-  tbody tr.changed { background: #EEF3FA !important; }
+  tbody tr:nth-child(even) { background: #121826; }
+  tbody tr.changed { background: #232B3E !important; }
   tbody tr.exited { opacity: 0.72; }
-  tbody tr.exited td.name { color: #73809A; }
-  tbody tr.podium-gold { background: #F8F1E2 !important; }
-  tbody tr.podium-silver { background: #F0F3F7 !important; }
-  tbody tr.podium-bronze { background: #FCEEEE !important; }
-  td.name { font-weight: 700; color: #16213D; }
+  tbody tr.exited td.name { color: #9AA6BC; }
+  tbody tr.podium-gold { background: #2E2A22 !important; }
+  tbody tr.podium-silver { background: #1F2738 !important; }
+  tbody tr.podium-bronze { background: #3A2E2E !important; }
+  td.name { font-weight: 700; color: #E8EEF7; }
   td.num { text-align: right; font-weight: 700; }
   .amount-wrap { display: inline-block; text-align: right; }
   .delta {
@@ -718,21 +723,34 @@ object ScoreboardImageExporter {
     font-weight: 700;
     margin-top: 2px;
   }
-  .delta-up { color: #607AA9; font-weight: 700; }
-  .delta-down { color: #1B7A3D; font-weight: 700; }
-  .delta-flat { color: #73809A; font-weight: 700; }
-  .pos { color: #1B7A3D; font-weight: 700; }
-  .neg { color: #B3261E; font-weight: 700; }
-  .zero { color: #73809A; font-weight: 700; }
+  .delta-up { color: #9BB0D2; font-weight: 700; }
+  .delta-down { color: #6BCB95; font-weight: 700; }
+  .delta-flat { color: #9AA6BC; font-weight: 700; }
+  .pos { color: #6BCB95; font-weight: 700; }
+  .neg { color: #E08A8A; font-weight: 700; }
+  .zero { color: #9AA6BC; font-weight: 700; }
   .footer {
     padding: 16px 22px 20px;
     overflow: hidden;
-    border-top: 1px solid #EEF2F8;
-    color: #73809A;
+    border-top: 1px solid #232B3E;
+    color: #9AA6BC;
     font-size: 13px;
   }
   .foot-line { float: left; }
-  .logo { float: right; font-weight: 700; color: #607AA9; }
+  .logo { float: right; font-weight: 700; color: #9BB0D2; }
+  .hero-main { display: flex; gap: 16px; align-items: flex-start; }
+  .hero-copy { flex: 1; min-width: 0; }
+  .sticker-wrap { position: relative; width: 108px; flex-shrink: 0; padding-top: 8px; }
+  .sticker-card {
+    width: 100px; height: 100px; margin: 0 auto;
+    background: #1C2438; border: 1px solid #2A3550; border-radius: 14px;
+    transform: rotate(-5deg); overflow: hidden;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.28);
+  }
+  .sticker { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; box-sizing: border-box; }
+  .sticker-caption {
+    margin-top: 10px; text-align: center; font-size: 11px; color: #9AA6BC; font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -743,11 +761,16 @@ object ScoreboardImageExporter {
           <img class="brand-logo" src="share_logo.png" alt="" />
           <div class="brand">蓝色大肥鱼记分器</div>
         </div>
-        <h1>$title</h1>
-        <div class="meta">
-          <div class="line">$time</div>
-          <div class="line">$summary</div>
-          <div class="line $statusClass">$status</div>
+        <div class="hero-main">
+          <div class="hero-copy">
+            <h1>$title</h1>
+            <div class="meta">
+              <div class="line">$time</div>
+              <div class="line">$summary</div>
+              <div class="line $statusClass">$status</div>
+            </div>
+          </div>
+          $stickerBlock
         </div>
       </div>
       $changesBlock
@@ -773,98 +796,12 @@ object ScoreboardImageExporter {
         """.trimIndent()
     }
 
-    private fun buildAiReportHtml(reportText: String): String {
-        val time = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
-        val body = escape(reportText).replace("\n", "<br/>")
-        return """
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=$CSS_WIDTH"/>
-<style>
-  @font-face {
-    font-family: 'Monaco';
-    src: url('fonts/Monaco.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'HuaWenKaiTi';
-    src: url('fonts/huawen_kaiti.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    width: ${CSS_WIDTH}px;
-    background: #F7F8FB;
-    font-family: 'Monaco', 'HuaWenKaiTi', serif;
-    color: #16213D;
-  }
-  .page { padding: 18px; }
-  .card {
-    background: #FFFFFF;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid #DFE8F5;
-  }
-  .hero {
-    padding: 22px 22px 16px;
-    background:
-      url('share_header.png') top center / 100% auto no-repeat,
-      linear-gradient(180deg, #DFE8F5 0%, #FFFFFF 72%);
-  }
-  .brand-row { display: flex; align-items: center; gap: 10px; }
-  .brand-logo { width: 36px; height: 36px; border-radius: 10px; }
-  .brand { font-size: 15px; font-weight: 800; color: #607AA9; }
-  h1 { margin-top: 14px; font-size: 28px; color: #202D52; }
-  .meta { margin-top: 8px; font-size: 13px; color: #73809A; }
-  .body {
-    padding: 8px 22px 22px;
-    font-size: 16px;
-    line-height: 1.65;
-    word-break: break-word;
-  }
-  .footer {
-    padding: 14px 22px 18px;
-    border-top: 1px solid #EEF2F8;
-    color: #73809A;
-    font-size: 13px;
-    overflow: hidden;
-  }
-  .foot-line { float: left; }
-  .logo { float: right; font-weight: 700; color: #607AA9; }
-</style>
-</head>
-<body>
-  <div class="page">
-    <div class="card">
-      <div class="hero">
-        <div class="brand-row">
-          <img class="brand-logo" src="share_logo.png" alt="" />
-          <div class="brand">蓝色大肥鱼记分器</div>
-        </div>
-        <h1>蓝色大肥鱼 · 本局 AI 复盘</h1>
-        <div class="meta">$time</div>
-      </div>
-      <div class="body">$body</div>
-      <div class="footer">
-        <div class="foot-line">结算复盘</div>
-        <div class="logo">蓝色大肥鱼记分器</div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-        """.trimIndent()
-    }
-
     private fun amountWithDelta(total: Int, delta: Int, deltaClass: String): String {
-        if (delta == 0) return "$total"
+        val totalText = signed(total)
+        if (delta == 0) return totalText
         return """
           <span class="amount-wrap">
-            $total
+            $totalText
             <span class="delta $deltaClass">${signed(delta)}</span>
           </span>
         """.trimIndent()

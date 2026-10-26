@@ -60,8 +60,8 @@ class TablePlayersAdapter(
             binding.nameText.text = player.name
             binding.takenText.text = ctx.getString(R.string.label_taken, player.totalTaken)
             binding.returnedText.text = ctx.getString(R.string.label_returned, player.totalReturned)
-            binding.profitText.text = ProfitFormat.netTakenText(player.netTaken)
-            binding.profitText.setTextColor(ProfitFormat.netTakenColor(ctx, player.netTaken))
+            binding.profitText.text = ProfitFormat.text(ctx, player.profit)
+            binding.profitText.setTextColor(ProfitFormat.color(ctx, player.profit))
 
             val active = player.status == PlayerStatus.ACTIVE
             binding.actionsContainer.visibility = View.VISIBLE

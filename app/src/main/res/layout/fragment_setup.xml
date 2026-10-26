@@ -22,38 +22,59 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="16dp"
             android:paddingBottom="12dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                android:textColor="@color/sky_blue_deep" />
+                android:clipChildren="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.chiptrack.app.ui.sticker.StickerBadgeView
+                    android:id="@+id/heroSticker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                        android:textColor="@color/ink" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/app_subtitle"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/app_subtitle"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="@color/text_secondary" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:text="@string/setup_title"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="@color/sky_blue_deep" />
+                android:textColor="@color/ink" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/buyInLayout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:hint="@string/label_default_buy_in">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -69,16 +90,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/label_player_names"
-                android:textAppearance="?attr/textAppearanceTitleMedium" />
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="@color/ink" />
 
-            <TextView
-                android:id="@+id/emptyHint"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/emptyState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/setup_empty_hint"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="@color/text_secondary" />
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/surface_muted"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="16dp">
+
+                    <com.chiptrack.app.ui.sticker.StickerBadgeView
+                        android:id="@+id/emptySticker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/emptyHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="@string/sticker_empty_caption"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:id="@+id/playerNamesContainer"
@@ -95,41 +146,68 @@
         android:background="@color/surface"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingTop="10dp"
+        android:paddingTop="12dp"
         android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/presetPlayersButton"
-            style="@style/Widget.Material3.Button.TonalButton"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/action_use_preset_players"
-            android:visibility="gone" />
+            android:layout_height="48dp"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/importPresetButton"
+                style="@style/Widget.ChipTrack.Button.PresetAction"
+                android:layout_marginEnd="6dp"
+                android:text="@string/action_import_preset" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createPresetButton"
+                style="@style/Widget.ChipTrack.Button.PresetAction"
+                android:layout_marginHorizontal="3dp"
+                android:text="@string/action_create_preset" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deletePresetButton"
+                style="@style/Widget.ChipTrack.Button.PresetAction"
+                android:layout_marginStart="6dp"
+                android:text="@string/action_delete_preset" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/shareMacroSettingsButton"
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="4dp"
-            android:text="@string/action_share_macro_settings" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/action_share_macro_settings"
+            android:textColor="@color/text_secondary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addPlayerButton"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/action_add_setup_player" />
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/action_add_setup_player"
+            android:textColor="@color/ink"
+            app:strokeColor="@color/sky_blue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/startButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="8dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="@string/action_start" />
     </LinearLayout>
 

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF16213D</color>
+    <!-- 柔和深海暗色：避免纯黑刺眼，文字用雾白保证对比 -->
+    <color name="black">#FFE8EEF7</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- 蓝色大肥鱼 / 档案馆色板：深蓝 · 雾蓝 · 纸白 · 浅珊瑚 -->
-    <color name="ink">#FF16213D</color>
-    <color name="deep">#FF202D52</color>
-    <color name="sky_blue">#FF607AA9</color>
-    <color name="sky_blue_dark">#FF4E6794</color>
-    <color name="sky_blue_deep">#FF202D52</color>
-    <color name="chip_gold">#FFB99A67</color>
-    <color name="mist">#FFDFE8F5</color>
-    <color name="coral">#FFF1C7C5</color>
-    <color name="surface">#FFF7F8FB</color>
-    <color name="surface_muted">#FFDFE8F5</color>
-    <color name="text_secondary">#FF73809A</color>
-    <color name="profit_positive">#FF1B7A3D</color>
-    <color name="profit_negative">#FFB3261E</color>
-    <color name="btn_add_points">#FF3D8B6E</color>
-    <color name="btn_add_points_container">#FFD8EEE4</color>
-    <color name="btn_remove_points">#FF607AA9</color>
-    <color name="btn_remove_points_container">#FFDFE8F5</color>
-    <color name="ic_launcher_background">#FFDFE8F5</color>
+    <color name="ink">#FFE8EEF7</color>
+    <color name="deep">#FFC5D0E6</color>
+    <color name="sky_blue">#FF8FA6C9</color>
+    <color name="sky_blue_dark">#FF6E86B0</color>
+    <color name="sky_blue_deep">#FF9BB0D2</color>
+    <color name="chip_gold">#FFC4AE86</color>
+    <color name="mist">#FF141B2A</color>
+    <color name="coral">#FF8A6A6A</color>
+    <color name="surface">#E61C2438</color>
+    <color name="surface_muted">#FF33405A</color>
+    <color name="text_secondary">#FF9AA6BC</color>
+    <color name="profit_positive">#FF6BCB95</color>
+    <color name="profit_negative">#FFE08A8A</color>
+    <color name="btn_add_points">#FF6BCB95</color>
+    <color name="btn_add_points_container">#FF24352F</color>
+    <color name="btn_remove_points">#FF9BB0D2</color>
+    <color name="btn_remove_points_container">#FF2A3550</color>
+    <color name="toolbar">#FF161D2E</color>
+    <color name="ic_launcher_background">#FF1C2438</color>
 </resources>

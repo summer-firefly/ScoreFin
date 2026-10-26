@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chiptrack.app.AiReportUiState
 import com.chiptrack.app.GameSessionViewModel
 import com.chiptrack.app.R
 import com.chiptrack.app.databinding.FragmentSettleBinding
@@ -21,6 +19,7 @@ import com.chiptrack.app.share.ShareHelper
 import com.chiptrack.app.ui.ProfitFormat
 import com.chiptrack.app.ui.history.HistoryFragment
 import com.chiptrack.app.ui.navigateOnce
+import com.chiptrack.app.ui.sticker.StickerMood
 import kotlin.math.abs
 
 class SettleFragment : Fragment() {
@@ -28,7 +27,6 @@ class SettleFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: GameSessionViewModel by activityViewModels()
     private lateinit var adapter: SettlePlayersAdapter
-    private var autoReportRequested = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,19 +62,11 @@ class SettleFragment : Fragment() {
             val session = viewModel.session.value ?: return@setOnClickListener
             ShareHelper.shareSessionTable(
                 fragment = this,
-                session = session,
-                aiReport = viewModel.currentAiReportText()
+                session = session
             )
         }
         binding.newGameButton.setOnClickListener {
             goHome()
-        }
-        binding.aiReportRetryButton.setOnClickListener {
-            viewModel.generateAiReport(force = true)
-        }
-
-        viewModel.aiReport.observe(viewLifecycleOwner) { state ->
-            renderAiReport(state)
         }
 
         viewModel.session.observe(viewLifecycleOwner) { session ->
@@ -122,51 +112,9 @@ class SettleFragment : Fragment() {
                 ProfitFormat.color(requireContext(), session.totalProfit)
             )
 
-            if (!autoReportRequested) {
-                autoReportRequested = true
-                viewModel.generateAiReport(force = false)
-            }
-        }
-    }
-
-    private fun renderAiReport(state: AiReportUiState) {
-        when (state) {
-            AiReportUiState.Disabled -> {
-                binding.aiReportCard.isVisible = false
-            }
-            AiReportUiState.Idle -> {
-                binding.aiReportCard.isVisible = true
-                binding.aiReportProgress.isVisible = false
-                binding.aiReportStatusText.isVisible = true
-                binding.aiReportStatusText.text = getString(R.string.ai_report_idle)
-                binding.aiReportText.isVisible = false
-                binding.aiReportRetryButton.isVisible = true
-            }
-            AiReportUiState.Loading -> {
-                binding.aiReportCard.isVisible = true
-                binding.aiReportProgress.isVisible = true
-                binding.aiReportStatusText.isVisible = true
-                binding.aiReportStatusText.text = getString(R.string.ai_report_loading)
-                binding.aiReportText.isVisible = false
-                binding.aiReportRetryButton.isVisible = false
-            }
-            is AiReportUiState.Ready -> {
-                binding.aiReportCard.isVisible = true
-                binding.aiReportProgress.isVisible = false
-                binding.aiReportStatusText.isVisible = false
-                binding.aiReportText.isVisible = true
-                binding.aiReportText.text = state.text
-                binding.aiReportRetryButton.isVisible = true
-            }
-            is AiReportUiState.Error -> {
-                binding.aiReportCard.isVisible = true
-                binding.aiReportProgress.isVisible = false
-                binding.aiReportStatusText.isVisible = true
-                binding.aiReportStatusText.text =
-                    getString(R.string.ai_report_error, state.message)
-                binding.aiReportText.isVisible = false
-                binding.aiReportRetryButton.isVisible = true
-            }
+            val mood = StickerMood.forSettle(session.totalProfit, gap)
+            binding.settleSticker.bind(mood, sizeDp = 104, rotation = -5f)
+            binding.settleStickerCaption.text = mood.caption
         }
     }
 

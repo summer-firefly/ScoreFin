@@ -2,6 +2,10 @@
 <resources>
     <string name="app_name">蓝色大肥鱼记分器</string>
     <string name="app_subtitle">德州扑克记分 · 蓝色大肥鱼</string>
+    <string name="mascot_content_description">蓝色大肥鱼形象</string>
+    <string name="sticker_empty_caption">还没有玩家，先导入名单或点下方添加～</string>
+    <string name="sticker_import_caption">名单已就位，可以开局啦</string>
+    <string name="sticker_playing_caption">对局进行中，记好每一手</string>
 
     <string name="setup_title">开局设置</string>
     <string name="label_default_buy_in">默认初始积分</string>
@@ -10,9 +14,24 @@
     <string name="action_remove_player">移除</string>
     <string name="action_start">开始本局</string>
     <string name="player_name_hint">玩家名称</string>
-    <string name="setup_empty_hint">还没有玩家，请点击下方添加，或使用预制名单</string>
-    <string name="action_use_preset_players">使用预制名单</string>
-    <string name="preset_players_loaded">已填入预制名单（%1$d 人）</string>
+    <string name="setup_empty_hint">还没有玩家，请点击下方添加，或导入名单</string>
+    <string name="action_import_preset">导入名单</string>
+    <string name="action_create_preset">新建名单</string>
+    <string name="action_delete_preset">删除名单</string>
+    <string name="preset_import_title">选择要导入的名单</string>
+    <string name="preset_delete_title">选择要删除的名单</string>
+    <string name="preset_item_label">%1$s（%2$d 人）</string>
+    <string name="preset_create_title">新建名单</string>
+    <string name="preset_name_hint">名单名称</string>
+    <string name="preset_players_hint">玩家名称（每行一个）</string>
+    <string name="preset_created">已新建名单「%1$s」</string>
+    <string name="preset_deleted">已删除「%1$s」</string>
+    <string name="preset_delete_confirm_title">删除名单</string>
+    <string name="preset_delete_confirm_message">确定删除「%1$s」？</string>
+    <string name="preset_players_loaded">已导入「%1$s」（%2$d 人）</string>
+    <string name="preset_empty">暂无名单，请先新建</string>
+    <string name="preset_name_required">请输入名单名称</string>
+    <string name="preset_players_required">请至少填写一位玩家</string>
     <string name="preset_players_missing">未找到预制名单文件 players.preset.json</string>
     <string name="error_need_players">请至少添加一位玩家</string>
 
@@ -20,22 +39,22 @@
     <string name="action_add_player">加入</string>
     <string name="action_history">流水</string>
     <string name="action_settle">去结算</string>
-    <string name="action_buy_in">拿取</string>
-    <string name="action_cash_out">退还</string>
+    <string name="action_buy_in">−</string>
+    <string name="action_cash_out">+</string>
     <string name="action_exit">退出</string>
     <string name="action_player_history">明细</string>
     <string name="label_taken">拿取 %1$d</string>
-    <string name="label_returned">退还 %1$d</string>
+    <string name="label_returned">归还 %1$d</string>
     <string name="section_active">在桌玩家</string>
     <string name="section_exited">已退出</string>
     <string name="table_summary_taken">拿取合计</string>
-    <string name="table_summary_returned">退还合计</string>
+    <string name="table_summary_returned">归还合计</string>
     <string name="table_player_count">%1$d 人在桌</string>
-    <string name="table_hint">主数字=净拿取（拿取−退还）。对局中记每一手拿取/退还；有人离桌请先点「退还」结清手上剩余；结束时只为在桌玩家统一退还并核对输赢。</string>
-    <string name="status_exited">已离桌 · 可点退还结清</string>
+    <string name="table_hint">主积分 = 归还 − 拿取（拿取为 −，归还为 +）。入局拿取 1000 显示 -1000。有人离桌请先点「+」结清手上剩余；结束时只为在桌玩家统一归还并核对输赢。</string>
+    <string name="status_exited">已离桌 · 可点 + 结清</string>
 
-    <string name="dialog_amount_title_buy_in">拿取积分</string>
-    <string name="dialog_amount_title_cash_out">退还积分</string>
+    <string name="dialog_amount_title_buy_in">拿取（−）</string>
+    <string name="dialog_amount_title_cash_out">归还（+）</string>
     <string name="dialog_amount_hint">自定义积分</string>
     <string name="dialog_quick_pick">快捷选择</string>
     <string name="dialog_points_1000">1000</string>
@@ -43,18 +62,18 @@
     <string name="dialog_confirm">确定</string>
     <string name="dialog_cancel">取消</string>
     <string name="dialog_exit_title">退出本局</string>
-    <string name="dialog_exit_message">确认让 %1$s 离桌？\n\n若手上还有剩余积分，请点该玩家的「退还」全部退回（输光则不用退还）。退清后，终局结算不必再填该玩家。</string>
-    <string name="dialog_exit_toast">%1$s 已离桌。若手上还有剩余积分，请点「退还」结清。</string>
+    <string name="dialog_exit_message">确认让 %1$s 离桌？\n\n若手上还有剩余积分，请点该玩家的「+」全部归还（输光则不用归还）。结清后，终局结算不必再填该玩家。</string>
+    <string name="dialog_exit_toast">%1$s 已离桌。若手上还有剩余积分，请点「+」结清。</string>
     <string name="dialog_add_player_title">加入玩家</string>
     <string name="dialog_add_name_hint">玩家名称</string>
     <string name="dialog_add_buy_in_hint">入局积分（默认 %1$d）</string>
 
-    <string name="final_return_title">统一退还</string>
-    <string name="final_return_subtitle">请填写每位在桌玩家手上要全部退回的积分。输光填 0。若中途已退还过，这里只填手上还剩的。</string>
-    <string name="final_return_subtitle_with_exited">请填写在桌玩家手上剩余积分（输光填 0）。已有 %1$d 人离桌，其手上剩余应已通过「退还」结清，此处不必再填。</string>
+    <string name="final_return_title">统一归还</string>
+    <string name="final_return_subtitle">请填写每位在桌玩家手上要全部归还的积分。输光填 0。若中途已归还过，这里只填手上还剩的。</string>
+    <string name="final_return_subtitle_with_exited">请填写在桌玩家手上剩余积分（输光填 0）。已有 %1$d 人离桌，其手上剩余应已通过「+」结清，此处不必再填。</string>
     <string name="final_return_taken">已拿取 %1$d</string>
-    <string name="final_return_already">中途已退还 %1$d</string>
-    <string name="final_return_hint">手上剩余（本次退还）</string>
+    <string name="final_return_already">中途已归还 %1$d</string>
+    <string name="final_return_hint">手上剩余（本次归还）</string>
     <string name="final_return_confirm">确认并查看输赢</string>
     <string name="final_return_player_exited">（已离桌）</string>
 
@@ -62,30 +81,30 @@
     <string name="settle_total">盈亏合计 %1$s</string>
     <string name="settle_reconcile_title">对账结果</string>
     <string name="settle_reconcile_taken">全场拿取 %1$d</string>
-    <string name="settle_reconcile_returned">全场退还 %1$d</string>
+    <string name="settle_reconcile_returned">全场归还 %1$d</string>
     <string name="settle_reconcile_ok">账目平衡</string>
-    <string name="settle_reconcile_over">多退了 %1$d（退还合计大于拿取合计）</string>
-    <string name="settle_reconcile_under">少退了 %1$d（退还合计小于拿取合计）</string>
+    <string name="settle_reconcile_over">多还了 %1$d（归还合计大于拿取合计）</string>
+    <string name="settle_reconcile_under">少还了 %1$d（归还合计小于拿取合计）</string>
     <string name="action_new_game">再开一局</string>
     <string name="action_back_home">返回主界面</string>
     <string name="action_settle_history">查看本局流水</string>
     <string name="label_settle_taken">拿取 %1$d</string>
-    <string name="label_settle_returned">退还 %1$d</string>
+    <string name="label_settle_returned">归还 %1$d</string>
     <string name="profit_positive">+%1$d</string>
     <string name="profit_zero">0</string>
     <string name="profit_negative">%1$d</string>
 
     <string name="history_global_title">本局流水</string>
-    <string name="history_global_subtitle">每一手拿取 / 退还记录（含终局统一退还）</string>
+    <string name="history_global_subtitle">每一手拿取 / 归还记录（含终局统一归还）</string>
     <string name="history_player_title">%1$s 的流水</string>
     <string name="history_player_subtitle">该玩家每一手积分变动</string>
     <string name="record_empty">暂无记录</string>
     <string name="record_action_join">入局</string>
     <string name="record_action_take">拿取</string>
-    <string name="record_action_return">退还</string>
-    <string name="record_action_final_return">终局退还</string>
+    <string name="record_action_return">归还</string>
+    <string name="record_action_final_return">终局归还</string>
     <string name="record_action_exit">退出</string>
-    <string name="record_detail">拿取合计 %1$d · 退还合计 %2$d</string>
+    <string name="record_detail">拿取合计 %1$d · 归还合计 %2$d</string>
 
     <string name="error_invalid_amount">请输入有效积分</string>
     <string name="error_empty_name">请输入玩家名称</string>
@@ -96,24 +115,17 @@
     <string name="share_to_other">其他应用</string>
     <string name="share_wechat_failed">无法打开微信，已改为系统分享</string>
     <string name="share_text">蓝色大肥鱼记分器 · 本局记分表</string>
-    <string name="share_text_with_two_images">蓝色大肥鱼记分器 · 结算表 + AI 复盘</string>
     <string name="share_empty">暂无玩家数据可分享</string>
     <string name="share_failed">生成分享图片失败</string>
-    <string name="share_report_image_failed">复盘图生成失败，已改为只分享结算表</string>
     <string name="share_generating">正在生成表格图片…</string>
-    <string name="ai_report_title">本局 AI 复盘</string>
-    <string name="ai_report_idle">点击右侧可生成复盘报告</string>
-    <string name="ai_report_loading">正在根据本局流水生成复盘…</string>
-    <string name="ai_report_retry">重新生成</string>
-    <string name="ai_report_error">生成失败：%1$s</string>
     <string name="share_title_live">蓝色大肥鱼 · 对局实时表</string>
     <string name="share_title_settle">蓝色大肥鱼 · 本局结算表</string>
     <string name="share_col_player">玩家</string>
     <string name="share_col_taken">拿取</string>
-    <string name="share_col_returned">退还</string>
-    <string name="share_col_net_taken">净拿取</string>
+    <string name="share_col_returned">归还</string>
+    <string name="share_col_net_taken">积分</string>
     <string name="share_col_profit">盈亏</string>
-    <string name="share_summary_taken_returned">拿取合计 %1$d · 退还合计 %2$d</string>
+    <string name="share_summary_taken_returned">拿取合计 %1$d · 归还合计 %2$d</string>
     <string name="share_summary_profit">盈亏合计 %1$s</string>
     <string name="share_summary_playing">对局进行中</string>
 

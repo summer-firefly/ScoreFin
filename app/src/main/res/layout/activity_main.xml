@@ -9,13 +9,15 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/sky_blue"
+        android:background="@color/toolbar"
         android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/ink"
         app:title="@string/app_name"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:titleTextColor="@color/ink" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHost"
