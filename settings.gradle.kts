@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "chipTrack"
+rootProject.name = "ScoreFin"
 include(":app")

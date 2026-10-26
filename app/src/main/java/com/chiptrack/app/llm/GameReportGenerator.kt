@@ -11,7 +11,7 @@ object GameReportGenerator {
     private const val MAX_RECORDS = 100
 
     private val systemPrompt = """
-你是「猫和老鼠计分器」的轻松牌局复盘助手。根据提供的德州扑克本地计分数据，用中文写一份本局总结报告。
+你是「蓝色大肥鱼记分器」的轻松牌局复盘助手。根据提供的德州扑克本地记分数据，用中文写一份本局总结报告。
 
 要求：
 1. 先写 2～4 句总评（气氛、波动、是否胶着）。

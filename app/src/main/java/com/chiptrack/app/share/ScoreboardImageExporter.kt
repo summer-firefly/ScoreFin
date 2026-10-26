@@ -373,7 +373,7 @@ object ScoreboardImageExporter {
         deltas: List<PlayerShareDelta>
     ): String {
         val settled = session.phase == SessionPhase.SETTLED
-        val title = if (settled) "猫和老鼠 · 本局结算表" else "猫和老鼠 · 对局实时表"
+        val title = if (settled) "蓝色大肥鱼 · 本局结算表" else "蓝色大肥鱼 · 对局实时表"
         val time = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
 
         val deltaById = deltas.associateBy { it.player.id }
@@ -735,7 +735,7 @@ object ScoreboardImageExporter {
       <div class="hero">
         <div class="brand-row">
           <img class="brand-logo" src="share_logo.png" alt="" />
-          <div class="brand">猫和老鼠计分器</div>
+          <div class="brand">蓝色大肥鱼记分器</div>
         </div>
         <h1>$title</h1>
         <div class="meta">
@@ -758,7 +758,7 @@ object ScoreboardImageExporter {
       </table>
       <div class="footer">
         <div class="foot-line">$profitTotal</div>
-        <div class="logo">猫和老鼠计分器</div>
+        <div class="logo">蓝色大肥鱼记分器</div>
       </div>
     </div>
   </div>
@@ -831,15 +831,15 @@ object ScoreboardImageExporter {
       <div class="hero">
         <div class="brand-row">
           <img class="brand-logo" src="share_logo.png" alt="" />
-          <div class="brand">猫和老鼠计分器</div>
+          <div class="brand">蓝色大肥鱼记分器</div>
         </div>
-        <h1>猫和老鼠 · 本局 AI 复盘</h1>
+        <h1>蓝色大肥鱼 · 本局 AI 复盘</h1>
         <div class="meta">$time</div>
       </div>
       <div class="body">$body</div>
       <div class="footer">
         <div class="foot-line">结算复盘</div>
-        <div class="logo">猫和老鼠计分器</div>
+        <div class="logo">蓝色大肥鱼记分器</div>
       </div>
     </div>
   </div>

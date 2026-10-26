@@ -1,13 +1,12 @@
-# 猫和老鼠计分器
+# 蓝色大肥鱼记分器
 
-Android 德州扑克计分 App（猫鼠卡通主题）。
+Android 德州扑克记分 App。
 
 - 对局记录每一手拿取 / 退还  
 - 结束时统一退还手上剩余积分并统计输赢  
 - 对账：多退 / 少退差额一目了然  
-- 分享计分表图片（可直达微信）
+- 分享记分表图片（可直达微信）
 
-> 界面与图标为原创猫鼠卡通风格，非华纳《猫和老鼠》正版素材。  
 > UI 字体：站酷快乐体（[ZCOOL KuaiLe](https://fonts.google.com/specimen/ZCOOL+KuaiLe)，SIL Open Font License）。
 
 ## 预制玩家名单
