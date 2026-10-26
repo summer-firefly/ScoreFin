@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 站酷快乐体：圆润可爱，SIL OFL 可商用 -->
+    <!-- 英文/数字：Monaco；中文：华文楷体（运行时 CustomFallback） -->
     <style name="TextAppearance.ChipTrack" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Body" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.BodySmall" parent="TextAppearance.Material3.BodySmall">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Title" parent="TextAppearance.Material3.TitleMedium">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Headline" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="TextAppearance.ChipTrack.Label" parent="TextAppearance.Material3.LabelLarge">
-        <item name="fontFamily">@font/zcool_kuaile</item>
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
+        <item name="fontFamily">@font/monaco</item>
+        <item name="android:fontFamily">@font/monaco</item>
     </style>
 
     <style name="Widget.ChipTrack.Button" parent="Widget.Material3.Button">
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
-        <item name="fontFamily">@font/zcool_kuaile</item>
+        <item name="android:fontFamily">@font/monaco</item>
+        <item name="fontFamily">@font/monaco</item>
     </style>
 
     <style name="Widget.ChipTrack.Toolbar" parent="Widget.Material3.Toolbar">
@@ -53,13 +53,18 @@
     <style name="Theme.ChipTrack" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/sky_blue</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/sky_blue_deep</item>
         <item name="colorSecondary">@color/chip_gold</item>
+        <item name="colorOnSecondary">@color/ink</item>
+        <item name="colorSurface">@color/surface</item>
         <item name="android:statusBarColor">@color/sky_blue_deep</item>
         <item name="android:navigationBarColor">@color/surface</item>
         <item name="android:windowBackground">@drawable/bg_app</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
 
-        <item name="android:fontFamily">@font/zcool_kuaile</item>
-        <item name="fontFamily">@font/zcool_kuaile</item>
+        <item name="android:fontFamily">@font/monaco</item>
+        <item name="fontFamily">@font/monaco</item>
 
         <item name="textAppearanceBodyLarge">@style/TextAppearance.ChipTrack.Body</item>
         <item name="textAppearanceBodyMedium">@style/TextAppearance.ChipTrack.BodyMedium</item>

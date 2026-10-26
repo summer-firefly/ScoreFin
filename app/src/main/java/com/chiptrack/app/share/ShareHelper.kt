@@ -10,6 +10,7 @@ import com.chiptrack.app.R
 import com.chiptrack.app.model.GameSession
 import com.chiptrack.app.share.macro.ShareMacroController
 import com.chiptrack.app.share.macro.ShareMacroStore
+import com.chiptrack.app.ui.showWithAppFonts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -113,7 +114,7 @@ object ShareHelper {
                     macroStore.featureEnabled = false
                     shareToWechatOrFallback(fragment, uris)
                 }
-                .show()
+                .showWithAppFonts()
             return true
         }
 
@@ -172,7 +173,7 @@ object ShareHelper {
                 }
             }
             .setNegativeButton(R.string.dialog_cancel, null)
-            .show()
+            .showWithAppFonts()
     }
 
     private fun shareToPackage(

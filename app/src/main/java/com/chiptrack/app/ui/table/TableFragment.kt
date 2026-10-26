@@ -17,6 +17,7 @@ import com.chiptrack.app.model.SessionPhase
 import com.chiptrack.app.share.ShareHelper
 import com.chiptrack.app.ui.history.HistoryFragment
 import com.chiptrack.app.ui.navigateOnce
+import com.chiptrack.app.ui.showWithAppFonts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -141,7 +142,7 @@ class TableFragment : Fragment() {
             applyPoints(2000)
             dialog.dismiss()
         }
-        dialog.show()
+        dialog.showWithAppFonts()
     }
 
     private fun confirmExit(player: Player) {
@@ -157,7 +158,7 @@ class TableFragment : Fragment() {
                 ).show()
             }
             .setNegativeButton(R.string.dialog_cancel, null)
-            .show()
+            .showWithAppFonts()
     }
 
     private fun showAddPlayerDialog() {
@@ -201,7 +202,7 @@ class TableFragment : Fragment() {
                 viewModel.addPlayer(name, buyIn)
             }
             .setNegativeButton(R.string.dialog_cancel, null)
-            .show()
+            .showWithAppFonts()
     }
 
     override fun onDestroyView() {

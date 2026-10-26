@@ -1,13 +1,14 @@
 # 蓝色大肥鱼记分器
 
-Android 德州扑克记分 App。
+Android 德州扑克记分 App（鲸鱼娘 DeepSeek / 蓝色大肥鱼主题）。
 
 - 对局记录每一手拿取 / 退还  
 - 结束时统一退还手上剩余积分并统计输赢  
 - 对账：多退 / 少退差额一目了然  
 - 分享记分表图片（可直达微信）
 
-> UI 字体：站酷快乐体（[ZCOOL KuaiLe](https://fonts.google.com/specimen/ZCOOL+KuaiLe)，SIL Open Font License）。
+> UI 字体：英文与数字用 Monaco，中文用华文楷体。  
+> 视觉参考：[蓝色大肥鱼档案馆](https://github.com/EDMOK/blue-fish-archive) 的蓝鲸 Logo 与深蓝/雾蓝/纸白色板。
 
 ## 预制玩家名单
 

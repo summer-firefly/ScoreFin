@@ -39,7 +39,7 @@ object ScoreboardImageExporter {
     private val EXPORT_SCALE_CANDIDATES = floatArrayOf(5f, 4f, 3.5f, 3f)
     /** 单张 Bitmap 像素上限，降低 OOM 风险 */
     private const val MAX_BITMAP_PIXELS = 28_000_000L
-    private const val BG_COLOR = 0xFFFFF6EB.toInt()
+    private const val BG_COLOR = 0xFFF7F8FB.toInt()
     private const val CROP_PADDING_PX = 24
 
     fun capture(
@@ -348,11 +348,11 @@ object ScoreboardImageExporter {
     }
 
     private fun isNearBg(color: Int): Boolean {
-        // 只认画布米色 #FFF6EB，勿把白色卡片当背景裁掉
+        // 只认画布纸白 #F7F8FB，勿把白色卡片当背景裁掉
         val r = Color.red(color)
         val g = Color.green(color)
         val b = Color.blue(color)
-        return abs(r - 255) <= 10 && abs(g - 246) <= 14 && abs(b - 235) <= 14
+        return abs(r - 247) <= 12 && abs(g - 248) <= 12 && abs(b - 251) <= 12
     }
 
     private fun saveToCache(activity: Activity, bitmap: Bitmap): Uri {
@@ -553,36 +553,42 @@ object ScoreboardImageExporter {
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   @font-face {
-    font-family: 'ZCOOLKuaiLe';
-    src: url('fonts/ZCOOLKuaiLe-Regular.ttf') format('truetype');
+    font-family: 'Monaco';
+    src: url('fonts/Monaco.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'HuaWenKaiTi';
+    src: url('fonts/huawen_kaiti.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
   html, body {
     width: ${CSS_WIDTH}px;
     min-height: 100%;
-    background: #FFF6EB;
-    color: #121212;
-    font-family: 'ZCOOLKuaiLe', 'PingFang SC', sans-serif;
+    background: #F7F8FB;
+    color: #16213D;
+    font-family: 'Monaco', 'HuaWenKaiTi', serif;
   }
   .page {
     width: ${CSS_WIDTH}px;
     padding: 28px;
     background:
-      linear-gradient(180deg, rgba(255,246,235,0.92) 0%, rgba(255,246,235,0.96) 100%),
+      linear-gradient(180deg, rgba(247,248,251,0.92) 0%, rgba(247,248,251,0.96) 100%),
       url('share_header.png') top center / 100% auto no-repeat,
-      #FFF6EB;
+      #F7F8FB;
   }
   .card {
     background: rgba(255,255,255,0.94);
-    border: 1px solid #F0E0CC;
+    border: 1px solid #DFE8F5;
     border-radius: 20px;
     overflow: hidden;
   }
   .hero {
     padding: 22px 28px 18px;
-    background: linear-gradient(180deg, #FFE7C8 0%, #FFF8F0 100%);
-    border-bottom: 1px solid #F0E0CC;
+    background: linear-gradient(180deg, #DFE8F5 0%, #F7F8FB 100%);
+    border-bottom: 1px solid #DFE8F5;
   }
   .brand-row {
     display: flex;
@@ -598,37 +604,37 @@ object ScoreboardImageExporter {
   .brand {
     font-size: 12px;
     letter-spacing: 0.06em;
-    color: #C45500;
+    color: #607AA9;
     font-weight: 700;
   }
   h1 {
     font-size: 26px;
     line-height: 1.25;
-    color: #A84500;
+    color: #202D52;
     font-weight: 700;
     margin-bottom: 12px;
   }
-  .meta { font-size: 14px; line-height: 1.55; color: #6B5A4A; }
+  .meta { font-size: 14px; line-height: 1.55; color: #73809A; }
   .meta .line { margin-top: 2px; }
-  .status-live { color: #C45500; font-weight: 700; }
+  .status-live { color: #607AA9; font-weight: 700; }
   .status-ok { color: #1B7A3D; font-weight: 700; }
   .status-bad { color: #B3261E; font-weight: 700; }
   .changes {
     margin: 0;
     padding: 16px 22px;
-    background: #FFF1D6;
-    border-bottom: 1px solid #F0E2C4;
+    background: #EEF3FA;
+    border-bottom: 1px solid #DFE8F5;
   }
   .changes-title {
     font-size: 13px;
     font-weight: 700;
-    color: #9A6B16;
+    color: #4E6794;
     margin-bottom: 10px;
   }
   .change-item {
     font-size: 15px;
     line-height: 1.55;
-    color: #121212;
+    color: #16213D;
     margin-top: 4px;
   }
   .change-name { font-weight: 700; margin-right: 8px; }
@@ -637,8 +643,8 @@ object ScoreboardImageExporter {
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #9A6B16;
-    background: #FFE7B0;
+    color: #4E6794;
+    background: #DFE8F5;
     border-radius: 4px;
     padding: 1px 6px;
     vertical-align: middle;
@@ -665,8 +671,8 @@ object ScoreboardImageExporter {
   }
   .medal.gold {
     color: #8A5A00;
-    background: #FFE7A0;
-    border: 1px solid #E0B14A;
+    background: #F3E6C8;
+    border: 1px solid #B99A67;
   }
   .medal.silver {
     color: #4A5560;
@@ -675,35 +681,35 @@ object ScoreboardImageExporter {
   }
   .medal.bronze {
     color: #7A3E14;
-    background: #F3D5B8;
-    border: 1px solid #D08A4A;
+    background: #F1C7C5;
+    border: 1px solid #D49A96;
   }
   table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   thead th {
-    background: #FFE8D0;
-    color: #6B5A4A;
+    background: #DFE8F5;
+    color: #73809A;
     font-size: 13px;
     font-weight: 700;
     text-align: left;
     padding: 14px 22px;
-    border-bottom: 1px solid #F0E0CC;
+    border-bottom: 1px solid #D0DBEC;
   }
   thead th.num { text-align: right; width: 42%; }
   tbody td {
     padding: 16px 22px;
     font-size: 18px;
-    border-bottom: 1px solid #F5EADF;
+    border-bottom: 1px solid #EEF2F8;
     word-break: break-all;
     vertical-align: middle;
   }
-  tbody tr:nth-child(even) { background: #FFF9F2; }
-  tbody tr.changed { background: #FFF4D6 !important; }
+  tbody tr:nth-child(even) { background: #F7F8FB; }
+  tbody tr.changed { background: #EEF3FA !important; }
   tbody tr.exited { opacity: 0.72; }
-  tbody tr.exited td.name { color: #6B5A4A; }
-  tbody tr.podium-gold { background: #FFF6D6 !important; }
-  tbody tr.podium-silver { background: #F4F7FA !important; }
-  tbody tr.podium-bronze { background: #FFF0E4 !important; }
-  td.name { font-weight: 700; color: #121212; }
+  tbody tr.exited td.name { color: #73809A; }
+  tbody tr.podium-gold { background: #F8F1E2 !important; }
+  tbody tr.podium-silver { background: #F0F3F7 !important; }
+  tbody tr.podium-bronze { background: #FCEEEE !important; }
+  td.name { font-weight: 700; color: #16213D; }
   td.num { text-align: right; font-weight: 700; }
   .amount-wrap { display: inline-block; text-align: right; }
   .delta {
@@ -712,21 +718,21 @@ object ScoreboardImageExporter {
     font-weight: 700;
     margin-top: 2px;
   }
-  .delta-up { color: #C45500; font-weight: 700; }
+  .delta-up { color: #607AA9; font-weight: 700; }
   .delta-down { color: #1B7A3D; font-weight: 700; }
-  .delta-flat { color: #6B5A4A; font-weight: 700; }
+  .delta-flat { color: #73809A; font-weight: 700; }
   .pos { color: #1B7A3D; font-weight: 700; }
   .neg { color: #B3261E; font-weight: 700; }
-  .zero { color: #6B5A4A; font-weight: 700; }
+  .zero { color: #73809A; font-weight: 700; }
   .footer {
     padding: 16px 22px 20px;
     overflow: hidden;
-    border-top: 1px solid #F5EADF;
-    color: #6B5A4A;
+    border-top: 1px solid #EEF2F8;
+    color: #73809A;
     font-size: 13px;
   }
   .foot-line { float: left; }
-  .logo { float: right; font-weight: 700; color: #C45500; }
+  .logo { float: right; font-weight: 700; color: #607AA9; }
 </style>
 </head>
 <body>
@@ -778,36 +784,42 @@ object ScoreboardImageExporter {
 <meta name="viewport" content="width=$CSS_WIDTH"/>
 <style>
   @font-face {
-    font-family: 'ZCOOLKuaiLe';
-    src: url('fonts/ZCOOLKuaiLe-Regular.ttf') format('truetype');
+    font-family: 'Monaco';
+    src: url('fonts/Monaco.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'HuaWenKaiTi';
+    src: url('fonts/huawen_kaiti.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
     width: ${CSS_WIDTH}px;
-    background: #FFF6EB;
-    font-family: 'ZCOOLKuaiLe', 'PingFang SC', 'Noto Sans SC', sans-serif;
-    color: #3D2F24;
+    background: #F7F8FB;
+    font-family: 'Monaco', 'HuaWenKaiTi', serif;
+    color: #16213D;
   }
   .page { padding: 18px; }
   .card {
     background: #FFFFFF;
     border-radius: 22px;
     overflow: hidden;
-    border: 1px solid #F0E0D0;
+    border: 1px solid #DFE8F5;
   }
   .hero {
     padding: 22px 22px 16px;
     background:
       url('share_header.png') top center / 100% auto no-repeat,
-      linear-gradient(180deg, #FFF1DE 0%, #FFFFFF 72%);
+      linear-gradient(180deg, #DFE8F5 0%, #FFFFFF 72%);
   }
   .brand-row { display: flex; align-items: center; gap: 10px; }
   .brand-logo { width: 36px; height: 36px; border-radius: 10px; }
-  .brand { font-size: 15px; font-weight: 800; color: #C45500; }
-  h1 { margin-top: 14px; font-size: 28px; color: #1A120C; }
-  .meta { margin-top: 8px; font-size: 13px; color: #6B5A4A; }
+  .brand { font-size: 15px; font-weight: 800; color: #607AA9; }
+  h1 { margin-top: 14px; font-size: 28px; color: #202D52; }
+  .meta { margin-top: 8px; font-size: 13px; color: #73809A; }
   .body {
     padding: 8px 22px 22px;
     font-size: 16px;
@@ -816,13 +828,13 @@ object ScoreboardImageExporter {
   }
   .footer {
     padding: 14px 22px 18px;
-    border-top: 1px solid #F5EADF;
-    color: #6B5A4A;
+    border-top: 1px solid #EEF2F8;
+    color: #73809A;
     font-size: 13px;
     overflow: hidden;
   }
   .foot-line { float: left; }
-  .logo { float: right; font-weight: 700; color: #C45500; }
+  .logo { float: right; font-weight: 700; color: #607AA9; }
 </style>
 </head>
 <body>

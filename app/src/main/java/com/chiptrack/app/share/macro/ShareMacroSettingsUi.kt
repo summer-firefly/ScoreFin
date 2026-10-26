@@ -2,6 +2,7 @@ package com.chiptrack.app.share.macro
 
 import android.content.Context
 import com.chiptrack.app.R
+import com.chiptrack.app.ui.showWithAppFonts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object ShareMacroSettingsUi {
@@ -29,6 +30,6 @@ object ShareMacroSettingsUi {
             .setNegativeButton(R.string.share_macro_clear) { _, _ ->
                 ShareMacroController.clearMacro(context)
             }
-            .show()
+            .showWithAppFonts()
     }
 }
