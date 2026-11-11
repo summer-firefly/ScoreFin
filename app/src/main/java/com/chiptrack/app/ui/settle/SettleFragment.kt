@@ -92,7 +92,7 @@ class SettleFragment : Fragment() {
                     binding.reconcileGapText.text =
                         getString(R.string.settle_reconcile_over, gap)
                     binding.reconcileGapText.setTextColor(
-                        ContextCompat.getColor(requireContext(), R.color.btn_remove_points)
+                        ContextCompat.getColor(requireContext(), R.color.chip_gold)
                     )
                 }
                 else -> {

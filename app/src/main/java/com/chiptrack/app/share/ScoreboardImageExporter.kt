@@ -723,8 +723,8 @@ object ScoreboardImageExporter {
     font-weight: 700;
     margin-top: 2px;
   }
-  .delta-up { color: #9BB0D2; font-weight: 700; }
-  .delta-down { color: #6BCB95; font-weight: 700; }
+  .delta-up { color: #6BCB95; font-weight: 700; }
+  .delta-down { color: #E08A8A; font-weight: 700; }
   .delta-flat { color: #9AA6BC; font-weight: 700; }
   .pos { color: #6BCB95; font-weight: 700; }
   .neg { color: #E08A8A; font-weight: 700; }

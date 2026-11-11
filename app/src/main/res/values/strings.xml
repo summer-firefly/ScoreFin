@@ -39,8 +39,8 @@
     <string name="action_add_player">加入</string>
     <string name="action_history">流水</string>
     <string name="action_settle">去结算</string>
-    <string name="action_buy_in">−</string>
-    <string name="action_cash_out">+</string>
+    <string name="action_buy_in">拿取</string>
+    <string name="action_cash_out">归还</string>
     <string name="action_exit">退出</string>
     <string name="action_player_history">明细</string>
     <string name="label_taken">拿取 %1$d</string>
@@ -50,11 +50,11 @@
     <string name="table_summary_taken">拿取合计</string>
     <string name="table_summary_returned">归还合计</string>
     <string name="table_player_count">%1$d 人在桌</string>
-    <string name="table_hint">主积分 = 归还 − 拿取（拿取为 −，归还为 +）。入局拿取 1000 显示 -1000。有人离桌请先点「+」结清手上剩余；结束时只为在桌玩家统一归还并核对输赢。</string>
-    <string name="status_exited">已离桌 · 可点 + 结清</string>
+    <string name="table_hint">主积分 = 归还 − 拿取。入局拿取 1000 显示 -1000。有人离桌请先点「归还」结清手上剩余；结束时只为在桌玩家统一归还并核对输赢。</string>
+    <string name="status_exited">已离桌 · 可点「归还」结清</string>
 
-    <string name="dialog_amount_title_buy_in">拿取（−）</string>
-    <string name="dialog_amount_title_cash_out">归还（+）</string>
+    <string name="dialog_amount_title_buy_in">拿取</string>
+    <string name="dialog_amount_title_cash_out">归还</string>
     <string name="dialog_amount_hint">自定义积分</string>
     <string name="dialog_quick_pick">快捷选择</string>
     <string name="dialog_points_1000">1000</string>
@@ -62,15 +62,15 @@
     <string name="dialog_confirm">确定</string>
     <string name="dialog_cancel">取消</string>
     <string name="dialog_exit_title">退出本局</string>
-    <string name="dialog_exit_message">确认让 %1$s 离桌？\n\n若手上还有剩余积分，请点该玩家的「+」全部归还（输光则不用归还）。结清后，终局结算不必再填该玩家。</string>
-    <string name="dialog_exit_toast">%1$s 已离桌。若手上还有剩余积分，请点「+」结清。</string>
+    <string name="dialog_exit_message">确认让 %1$s 离桌？\n\n若手上还有剩余积分，请点该玩家的「归还」全部归还（输光则不用归还）。结清后，终局结算不必再填该玩家。</string>
+    <string name="dialog_exit_toast">%1$s 已离桌。若手上还有剩余积分，请点「归还」结清。</string>
     <string name="dialog_add_player_title">加入玩家</string>
     <string name="dialog_add_name_hint">玩家名称</string>
     <string name="dialog_add_buy_in_hint">入局积分（默认 %1$d）</string>
 
     <string name="final_return_title">统一归还</string>
     <string name="final_return_subtitle">请填写每位在桌玩家手上要全部归还的积分。输光填 0。若中途已归还过，这里只填手上还剩的。</string>
-    <string name="final_return_subtitle_with_exited">请填写在桌玩家手上剩余积分（输光填 0）。已有 %1$d 人离桌，其手上剩余应已通过「+」结清，此处不必再填。</string>
+    <string name="final_return_subtitle_with_exited">请填写在桌玩家手上剩余积分（输光填 0）。已有 %1$d 人离桌，其手上剩余应已通过「归还」结清，此处不必再填。</string>
     <string name="final_return_taken">已拿取 %1$d</string>
     <string name="final_return_already">中途已归还 %1$d</string>
     <string name="final_return_hint">手上剩余（本次归还）</string>

@@ -82,6 +82,7 @@
                 android:insetBottom="0dp"
                 android:minHeight="0dp"
                 android:text="@string/action_buy_in"
+                android:textAllCaps="false"
                 android:textColor="@color/btn_remove_points"
                 android:textSize="13sp"
                 app:backgroundTint="@color/btn_remove_points_container" />
@@ -97,6 +98,7 @@
                 android:insetBottom="0dp"
                 android:minHeight="0dp"
                 android:text="@string/action_cash_out"
+                android:textAllCaps="false"
                 android:textColor="@color/btn_add_points"
                 android:textSize="13sp"
                 app:backgroundTint="@color/btn_add_points_container" />

@@ -16,10 +16,10 @@
     <color name="text_secondary">#FF9AA6BC</color>
     <color name="profit_positive">#FF6BCB95</color>
     <color name="profit_negative">#FFE08A8A</color>
-    <color name="btn_add_points">#FF6BCB95</color>
-    <color name="btn_add_points_container">#FF24352F</color>
-    <color name="btn_remove_points">#FF9BB0D2</color>
-    <color name="btn_remove_points_container">#FF2A3550</color>
+    <color name="btn_add_points">#FFFFFFFF</color>
+    <color name="btn_add_points_container">#FF2F8F5B</color>
+    <color name="btn_remove_points">#FFFFFFFF</color>
+    <color name="btn_remove_points_container">#FFC45C5C</color>
     <color name="toolbar">#FF161D2E</color>
     <color name="ic_launcher_background">#FF1C2438</color>
 </resources>
