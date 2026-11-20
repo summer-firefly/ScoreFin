@@ -15,7 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * 不接微信 SDK：优先直达微信；记住上次目标 App；必要时再走系统选择器。
- * 测试版可选无障碍宏：首次录制微信内点击，之后回放。
+ * 可选「微信快捷分享」：首次录制微信内点击，之后回放自动完成发送。
  */
 object ShareHelper {
     private const val WECHAT_PACKAGE = "com.tencent.mm"

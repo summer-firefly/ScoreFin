@@ -38,7 +38,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- 测试版：微信分享宏录制/回放（脆弱，仅自测） -->
+        <!-- 可选：微信快捷分享（录制/回放选会话与发送） -->
         <service
             android:name=".share.macro.ShareMacroAccessibilityService"
             android:exported="true"

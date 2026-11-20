@@ -21,8 +21,8 @@ import android.widget.TextView
 import com.chiptrack.app.R
 
 /**
- * 测试版分享宏：用无障碍浮层捕获真实触摸（含微信「发送」），再手势回放。
- * 脆弱，仅供自测。
+ * 微信快捷分享：用无障碍浮层录制真实触摸（含「发送」），再手势回放。
+ * 仅在微信界面生效；界面改版后可能需要重新录制。
  */
 class ShareMacroAccessibilityService : AccessibilityService() {
 

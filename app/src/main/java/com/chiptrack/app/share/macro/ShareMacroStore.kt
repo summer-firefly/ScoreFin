@@ -5,7 +5,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 
 /**
- * 测试用：保存分享宏步骤，以及是否启用宏分享。
+ * 微信快捷分享：保存录制步骤，以及是否启用该可选功能。
  */
 class ShareMacroStore(context: Context) {
     private val prefs = context.applicationContext
@@ -16,9 +16,9 @@ class ShareMacroStore(context: Context) {
         encodeDefaults = true
     }
 
-    /** 测试开关：开启后走录制/回放；关闭则用普通微信分享 */
+    /** 可选开关：开启后走录制/回放；关闭则用普通分享。默认关闭。 */
     var featureEnabled: Boolean
-        get() = prefs.getBoolean(KEY_ENABLED, true)
+        get() = prefs.getBoolean(KEY_ENABLED, false)
         set(value) = prefs.edit().putBoolean(KEY_ENABLED, value).apply()
 
     var steps: List<ShareMacroStep>

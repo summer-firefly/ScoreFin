@@ -75,10 +75,11 @@ class SettleFragment : Fragment() {
             val ranked = session.players.sortedByDescending { it.profit }
             adapter.submitList(ranked)
 
-            binding.reconcileTakenText.text =
-                getString(R.string.settle_reconcile_taken, session.totalTakenSum)
-            binding.reconcileReturnedText.text =
-                getString(R.string.settle_reconcile_returned, session.totalReturnedSum)
+            binding.reconcileTakenText.text = getString(
+                R.string.settle_reconcile_sums,
+                session.totalTakenSum,
+                session.totalReturnedSum
+            )
 
             val gap = session.reconcileGap
             when {
@@ -90,14 +91,14 @@ class SettleFragment : Fragment() {
                 }
                 gap > 0 -> {
                     binding.reconcileGapText.text =
-                        getString(R.string.settle_reconcile_over, gap)
+                        getString(R.string.settle_reconcile_over_short, gap)
                     binding.reconcileGapText.setTextColor(
                         ContextCompat.getColor(requireContext(), R.color.chip_gold)
                     )
                 }
                 else -> {
                     binding.reconcileGapText.text =
-                        getString(R.string.settle_reconcile_under, abs(gap))
+                        getString(R.string.settle_reconcile_under_short, abs(gap))
                     binding.reconcileGapText.setTextColor(
                         ContextCompat.getColor(requireContext(), R.color.profit_negative)
                     )
@@ -113,7 +114,7 @@ class SettleFragment : Fragment() {
             )
 
             val mood = StickerMood.forSettle(session.totalProfit, gap)
-            binding.settleSticker.bind(mood, sizeDp = 104, rotation = -5f)
+            binding.settleSticker.bind(mood, sizeDp = 48, rotation = -5f)
             binding.settleStickerCaption.text = mood.caption
         }
     }

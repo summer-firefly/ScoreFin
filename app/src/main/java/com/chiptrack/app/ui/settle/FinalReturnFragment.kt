@@ -46,10 +46,10 @@ class FinalReturnFragment : Fragment() {
                     // 已退出玩家应已通过「退还」结清，终局只填在桌玩家
                     adapter.submitList(session.activePlayers)
                     val exitedHint = if (session.exitedPlayers.isEmpty()) {
-                        getString(R.string.final_return_subtitle)
+                        getString(R.string.final_return_subtitle_short)
                     } else {
                         getString(
-                            R.string.final_return_subtitle_with_exited,
+                            R.string.final_return_subtitle_with_exited_short,
                             session.exitedPlayers.size
                         )
                     }

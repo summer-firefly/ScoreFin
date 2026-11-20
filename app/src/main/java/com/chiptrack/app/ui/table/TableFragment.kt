@@ -48,8 +48,7 @@ class TableFragment : Fragment() {
         )
         binding.playersList.layoutManager = LinearLayoutManager(requireContext())
         binding.playersList.adapter = adapter
-        binding.tableSticker.bind(StickerMood.forPlaying(), sizeDp = 88, rotation = -4f)
-        binding.tableStickerCaption.text = getString(R.string.sticker_playing_caption)
+        binding.tableSticker.bind(StickerMood.forPlaying(), sizeDp = 48, rotation = -4f)
 
         binding.addPlayerButton.setOnClickListener { showAddPlayerDialog() }
         binding.historyButton.setOnClickListener {

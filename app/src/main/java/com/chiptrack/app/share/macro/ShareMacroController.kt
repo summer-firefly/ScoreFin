@@ -30,27 +30,6 @@ object ShareMacroController {
         )
     }
 
-    fun statusSummary(context: Context): String {
-        val store = ShareMacroStore(context)
-        val a11y = if (isServiceEnabled(context)) {
-            context.getString(R.string.share_macro_a11y_on)
-        } else {
-            context.getString(R.string.share_macro_a11y_off)
-        }
-        val feature = if (store.featureEnabled) {
-            context.getString(R.string.share_macro_feature_on)
-        } else {
-            context.getString(R.string.share_macro_feature_off)
-        }
-        val steps = store.steps.size
-        val macro = if (steps > 0) {
-            context.getString(R.string.share_macro_steps_count, steps)
-        } else {
-            context.getString(R.string.share_macro_steps_empty)
-        }
-        return "$feature\n$a11y\n$macro"
-    }
-
     fun startRecording(context: Context): Boolean {
         val service = ShareMacroAccessibilityService.instance
         if (service == null) {
