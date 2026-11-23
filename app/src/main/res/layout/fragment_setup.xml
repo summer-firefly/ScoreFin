@@ -179,17 +179,6 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/shareMacroSettingsButton"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="4dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/action_share_macro_settings"
-            android:textColor="@color/text_secondary" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/addPlayerButton"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"

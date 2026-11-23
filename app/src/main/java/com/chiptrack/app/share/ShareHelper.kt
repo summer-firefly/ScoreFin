@@ -8,14 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.chiptrack.app.R
 import com.chiptrack.app.model.GameSession
-import com.chiptrack.app.share.macro.ShareMacroController
-import com.chiptrack.app.share.macro.ShareMacroStore
 import com.chiptrack.app.ui.showWithAppFonts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * 不接微信 SDK：优先直达微信；记住上次目标 App；必要时再走系统选择器。
- * 可选「微信快捷分享」：首次录制微信内点击，之后回放自动完成发送。
  */
 object ShareHelper {
     private const val WECHAT_PACKAGE = "com.tencent.mm"
@@ -49,11 +46,6 @@ object ShareHelper {
     private fun launchShare(fragment: Fragment, uris: List<Uri>) {
         if (uris.isEmpty()) return
         val context = fragment.requireContext()
-        val macroStore = ShareMacroStore(context)
-        if (macroStore.featureEnabled) {
-            if (tryMacroShare(fragment, uris, macroStore)) return
-        }
-
         val prefs = ShareTargetStore(context)
         val preferred = prefs.lastPackage
         val wechatInstalled = isPackageInstalled(context, WECHAT_PACKAGE)
@@ -70,52 +62,6 @@ object ShareHelper {
         }
 
         showSharePicker(fragment, uris, wechatInstalled, prefs)
-    }
-
-    private fun tryMacroShare(
-        fragment: Fragment,
-        uris: List<Uri>,
-        macroStore: ShareMacroStore
-    ): Boolean {
-        val context = fragment.requireContext()
-        if (!ShareMacroController.isServiceEnabled(context)) {
-            MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.share_macro_need_a11y_title)
-                .setMessage(R.string.share_macro_need_a11y_body)
-                .setPositiveButton(R.string.share_macro_open_a11y) { _, _ ->
-                    ShareMacroController.openAccessibilitySettings(context)
-                }
-                .setNegativeButton(R.string.share_macro_share_without) { _, _ ->
-                    shareToWechatOrFallback(fragment, uris)
-                }
-                .setNeutralButton(R.string.share_macro_action_disable) { _, _ ->
-                    macroStore.featureEnabled = false
-                    shareToWechatOrFallback(fragment, uris)
-                }
-                .showWithAppFonts()
-            return true
-        }
-
-        if (!shareToPackage(fragment, uris, WECHAT_PACKAGE)) {
-            Toast.makeText(context, R.string.share_wechat_failed, Toast.LENGTH_SHORT).show()
-            return false
-        }
-        ShareTargetStore(context).lastPackage = WECHAT_PACKAGE
-
-        if (macroStore.hasSteps()) {
-            ShareMacroController.scheduleReplay(context)
-        } else {
-            ShareMacroController.startRecording(context)
-        }
-        return true
-    }
-
-    private fun shareToWechatOrFallback(fragment: Fragment, uris: List<Uri>) {
-        if (shareToPackage(fragment, uris, WECHAT_PACKAGE)) {
-            ShareTargetStore(fragment.requireContext()).lastPackage = WECHAT_PACKAGE
-            return
-        }
-        openSystemChooser(fragment, uris)
     }
 
     private fun showSharePicker(

@@ -137,37 +137,4 @@
     <string name="share_summary_taken_returned">拿取合计 %1$d · 归还合计 %2$d</string>
     <string name="share_summary_profit">盈亏合计 %1$s</string>
     <string name="share_summary_playing">对局进行中</string>
-
-    <!-- 微信快捷分享（可选，需无障碍） -->
-    <string name="action_share_macro_settings">微信快捷分享</string>
-    <string name="share_macro_service_label">蓝色大肥鱼·微信快捷分享</string>
-    <string name="share_macro_service_desc">用于录制并回放你在微信分享页中的点击（如选择会话、发送）。仅在微信界面生效，可随时在系统设置中关闭。</string>
-    <string name="share_macro_settings_title">微信快捷分享</string>
-    <string name="share_macro_settings_intro">可选功能：开启后，分享记分表到微信时可自动完成「选会话 → 发送」。需要开启本应用的无障碍服务，且仅在微信内工作。不用时可随时关闭，不影响普通分享。</string>
-    <string name="share_macro_settings_status_title">当前状态</string>
-    <string name="share_macro_settings_how_title">使用方法</string>
-    <string name="share_macro_settings_how">1. 开启本功能，并在系统设置中打开「蓝色大肥鱼·微信快捷分享」无障碍服务\n2. 第一次点「分享」后，按绿条提示在微信里点选会话并点「发送」\n3. 完成后返回本 App；之后再次分享会尝试自动回放\n\n若微信界面改版或列表滚动导致失败，可清除步骤后重新录制。</string>
-    <string name="share_macro_settings_done">完成</string>
-    <string name="share_macro_open_a11y">打开无障碍设置</string>
-    <string name="share_macro_clear">清除已录步骤</string>
-    <string name="share_macro_action_enable">开启快捷分享</string>
-    <string name="share_macro_action_disable">关闭快捷分享</string>
-    <string name="share_macro_feature_on">功能：已开启</string>
-    <string name="share_macro_feature_off">功能：已关闭</string>
-    <string name="share_macro_a11y_on">无障碍服务：已开启</string>
-    <string name="share_macro_a11y_off">无障碍服务：未开启</string>
-    <string name="share_macro_steps_count">已录步骤：%1$d 步</string>
-    <string name="share_macro_steps_empty">已录步骤：无（下次分享时开始录制）</string>
-    <string name="share_macro_need_a11y">请先在系统设置中开启「蓝色大肥鱼·微信快捷分享」无障碍服务</string>
-    <string name="share_macro_need_a11y_title">需要开启无障碍服务</string>
-    <string name="share_macro_need_a11y_body">微信快捷分享需要无障碍服务，才能录制/回放微信内的点击。你也可以本次改用普通分享，或先关闭此功能。</string>
-    <string name="share_macro_share_without">本次普通分享</string>
-    <string name="share_macro_recording">正在录制快捷分享：屏幕顶部有绿条。请在微信里点选会话并点「发送」，完成后返回本 App。</string>
-    <string name="share_macro_recording_banner">录制中 · 请点选会话并点发送 · 完成后返回计分器</string>
-    <string name="share_macro_saved">已保存快捷分享步骤（%1$d 步），下次分享将尝试自动完成</string>
-    <string name="share_macro_saved_empty">未录到有效点击。请确认录制时屏幕顶部有绿条，再完整点选会话并发送一次。</string>
-    <string name="share_macro_replaying">正在自动完成微信分享…</string>
-    <string name="share_macro_replay_done">快捷分享已完成</string>
-    <string name="share_macro_replay_failed">快捷分享未完成，可改用普通分享或重新录制</string>
-    <string name="share_macro_cleared">已清除快捷分享步骤</string>
 </resources>

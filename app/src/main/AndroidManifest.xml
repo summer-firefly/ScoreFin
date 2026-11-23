@@ -37,20 +37,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <!-- 可选：微信快捷分享（录制/回放选会话与发送） -->
-        <service
-            android:name=".share.macro.ShareMacroAccessibilityService"
-            android:exported="true"
-            android:label="@string/share_macro_service_label"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/share_macro_accessibility_service" />
-        </service>
     </application>
 
 </manifest>

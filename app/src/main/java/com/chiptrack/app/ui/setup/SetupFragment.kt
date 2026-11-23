@@ -15,7 +15,6 @@ import com.chiptrack.app.databinding.DialogCreatePresetBinding
 import com.chiptrack.app.databinding.FragmentSetupBinding
 import com.chiptrack.app.databinding.ItemSetupPlayerBinding
 import com.chiptrack.app.model.SessionPhase
-import com.chiptrack.app.share.macro.ShareMacroSettingsUi
 import com.chiptrack.app.ui.navigateOnce
 import com.chiptrack.app.ui.showWithAppFonts
 import com.chiptrack.app.ui.sticker.StickerMood
@@ -48,9 +47,6 @@ class SetupFragment : Fragment() {
         binding.importPresetButton.setOnClickListener { showImportPresetDialog() }
         binding.createPresetButton.setOnClickListener { showCreatePresetDialog() }
         binding.deletePresetButton.setOnClickListener { showDeletePresetDialog() }
-        binding.shareMacroSettingsButton.setOnClickListener {
-            ShareMacroSettingsUi.show(requireContext())
-        }
         binding.addPlayerButton.setOnClickListener { addPlayerRow() }
         binding.startButton.setOnClickListener { startGame() }
 

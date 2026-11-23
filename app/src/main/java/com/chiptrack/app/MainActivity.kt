@@ -9,7 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.chiptrack.app.databinding.ActivityMainBinding
 import com.chiptrack.app.model.SessionPhase
-import com.chiptrack.app.share.macro.ShareMacroController
 import com.chiptrack.app.ui.history.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
@@ -26,12 +25,6 @@ class MainActivity : AppCompatActivity() {
         R.id.setupFragment,
         R.id.tableFragment
     )
-
-    override fun onResume() {
-        super.onResume()
-        // 从微信返回时结束宏录制并保存
-        ShareMacroController.finishRecordingIfNeeded(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
